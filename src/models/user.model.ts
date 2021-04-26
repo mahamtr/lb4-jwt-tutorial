@@ -1,20 +1,7 @@
 import {Entity, hasOne, model, property} from '@loopback/repository';
 import {UserCredentials} from './user-credentials.model';
 
-@model({
-  settings: {
-    indexes: {
-      uniqueEmail: {
-        keys: {
-          email: 1,
-        },
-        options: {
-          unique: true,
-        },
-      },
-    },
-  },
-})
+@model()
 export class User extends Entity {
   @property({
     type: 'string',

@@ -1,17 +1,18 @@
+import {AuthenticationComponent, registerAuthenticationStrategy} from '@loopback/authentication';
+import {AuthorizationComponent} from '@loopback/authorization';
 import {BootMixin} from '@loopback/boot';
 import {ApplicationConfig, createBindingFromClass} from '@loopback/core';
-import {RestExplorerBindings, RestExplorerComponent} from '@loopback/rest-explorer';
 import {RepositoryMixin} from '@loopback/repository';
 import {OpenApiSpec, RestApplication} from '@loopback/rest';
+import {RestExplorerBindings, RestExplorerComponent} from '@loopback/rest-explorer';
 import {ServiceMixin} from '@loopback/service-proxy';
 import path from 'path';
-import {MySequence} from './sequence';
-import {AuthenticationComponent, registerAuthenticationStrategy} from '@loopback/authentication';
 import {JWTAuthenticationStrategy} from './authentication-strategies/jwt-strategy';
 import {PasswordHasherBindings, TokenServiceBindings, TokenServiceConstants, UserServiceBindings} from './keys';
+import {MySequence} from './sequence';
 import {BcryptHasher, JWTService, MyUserService} from './services';
 import {SECURITY_SCHEME_SPEC, SECURITY_SPEC} from './utils/security-spec';
-import {AuthorizationComponent} from '@loopback/authorization';
+const dotenv = require('dotenv').config().parsed;
 
 export class JwtTutorialApplication extends BootMixin(
   ServiceMixin(RepositoryMixin(RestApplication)),
@@ -83,5 +84,23 @@ export class JwtTutorialApplication extends BootMixin(
     this.bind(PasswordHasherBindings.PASSWORD_HASHER).toClass(BcryptHasher);
 
     this.bind(UserServiceBindings.USER_SERVICE).toClass(MyUserService);
+
+
+    this.bind('datasources.config.mysql').to({
+      name: 'mysql',
+      connector: 'mssql',
+      url: '',
+      host: dotenv.DB_SERVER,
+      port: 1433,
+      user: dotenv.DB_USER,
+      password: dotenv.DB_PASSWORD,
+      database: dotenv.CATALOG,
+      "options": {
+        "encrypt": true,
+        "enableArithAbort": true
+      }
+    });
+
+
   }
 }
