@@ -12,7 +12,6 @@ import {PasswordHasherBindings, TokenServiceBindings, TokenServiceConstants, Use
 import {MySequence} from './sequence';
 import {BcryptHasher, JWTService, MyUserService} from './services';
 import {SECURITY_SCHEME_SPEC, SECURITY_SPEC} from './utils/security-spec';
-const dotenv = require('dotenv').config().parsed;
 
 export class JwtTutorialApplication extends BootMixin(
   ServiceMixin(RepositoryMixin(RestApplication)),
@@ -90,11 +89,11 @@ export class JwtTutorialApplication extends BootMixin(
       name: 'mysql',
       connector: 'mssql',
       url: '',
-      host: dotenv.DB_SERVER,
+      host: process.env.DB_SERVER,
       port: 1433,
-      user: dotenv.DB_USER,
-      password: dotenv.DB_PASSWORD,
-      database: dotenv.CATALOG,
+      user: process.env.DB_USER,
+      password: process.env.DB_PASSWORD,
+      database: process.env.CATALOG,
       "options": {
         "encrypt": true,
         "enableArithAbort": true
