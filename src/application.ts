@@ -90,11 +90,11 @@ export class JwtTutorialApplication extends BootMixin(
       name: 'mysql',
       connector: 'mssql',
       url: '',
-      host: dotenv.DB_SERVER ?? process.env.DB_SERVER,
+      host: dotenv?.DB_SERVER ?? process.env.DB_SERVER,
       port: 1433,
-      user: dotenv.DB_USER ?? process.env.DB_USER,
-      password: dotenv.DB_PASSWORD ?? process.env.DB_PASSWORD,
-      database: dotenv.CATALOG ?? process.env.CATALOG,
+      user: dotenv?.DB_USER ?? process.env.DB_USER,
+      password: dotenv?.DB_PASSWORD ?? process.env.DB_PASSWORD,
+      database: dotenv?.CATALOG ?? process.env.CATALOG,
       "options": {
         "encrypt": true,
         "enableArithAbort": true
