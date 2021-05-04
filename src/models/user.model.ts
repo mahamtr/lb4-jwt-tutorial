@@ -19,6 +19,12 @@ export class User extends Entity {
 
   @property({
     type: 'string',
+    default: '',
+  })
+  username: string;
+
+  @property({
+    type: 'string',
     nullable: false,
   })
   role: string;
